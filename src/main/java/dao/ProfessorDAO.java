@@ -89,5 +89,15 @@ public class ProfessorDAO implements GenericDAO<Professor, Integer> {
         }
         return Optional.empty();
     }
+    public void deletar(Professor professor){
+        String sql= "delete from java_professor where id=?";
+        try(Connection connection=ConnectionFactory.obterConexao(); PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.setInt(1, professor.getIdProfessor());
+            ps.execute();
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 
 }
